@@ -14,7 +14,7 @@ Ce projet est une application de gestion des ressources humaines développée en
 │  │   Container: rh-mysql    │  │  Container: rh-javafx-app   │ │
 │  │  ┌────────────────────┐  │  │  ┌───────────────────────┐  │ │
 │  │  │   MySQL 8.0        │  │  │  │   VNC Server :5901    │  │ │
-│  │  │   Port: 3306       │  │  │  │   (TightVNC)          │  │ │
+│  │  │   Port: 3308       │  │  │  │   (TightVNC)          │  │ │
 │  │  │   Database:        │  │  │  └───────────────────────┘  │ │
 │  │  │   rh_javafx_db     │◄─┼──┼──┤   JavaFX Application    │  │
 │  │  │                    │  │  │  │   (JDK 17 + JavaFX)    │  │
