@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.rh.javafx.controller.LoginController"
+           style="-fx-background-color: linear-gradient(135deg, #D1FAE5 0%, #F0FDF4 100%);"
+           prefHeight="600" prefWidth="480">
+
+    <VBox alignment="CENTER" spacing="20" styleClass="login-container">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+
+        <!-- Logo/Title -->
+        <Text text="Système de Gestion RH" styleClass="login-title"/>
+        <Text text="Connexion" style="-fx-font-size: 18px; -fx-fill: #6B7280; -fx-font-weight: 500;"/>
+
+        <VBox spacing="15" VBox.vgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="0" bottom="20" left="0"/>
+            </padding>
+
+            <!-- Email Field -->
+            <VBox spacing="5">
+                <Label text="Email:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="emailField" promptText="admin@rh.com" prefWidth="300">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </TextField>
+            </VBox>
+
+            <!-- Password Field -->
+            <VBox spacing="5">
+                <Label text="Mot de passe:" style="-fx-font-weight: bold;"/>
+                <PasswordField fx:id="passwordField" promptText="••••••••" prefWidth="300">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </PasswordField>
+            </VBox>
+
+            <!-- Error Label -->
+            <Label fx:id="errorLabel" visible="false" wrapText="true"
+                   style="-fx-text-fill: #f44336; -fx-font-size: 12px;"/>
+
+            <!-- Login Button -->
+            <Button fx:id="loginButton" text="Se connecter" onAction="#handleLogin"
+                    prefWidth="300" prefHeight="40" styleClass="button"
+                    style="-fx-font-size: 16px; -fx-font-weight: bold;">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Button>
+
+            <!-- Create Account Link -->
+            <HBox alignment="CENTER" spacing="5">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+                <Label text="Pas de compte?" style="-fx-text-fill: #6B7280;"/>
+                <Hyperlink fx:id="createAccountLink" text="Créer un compte"
+                           onAction="#handleCreateAccount"
+                           styleClass="hyperlink"/>
+            </HBox>
+        </VBox>
+
+        <!-- Info Text -->
+        <!-- <VBox alignment="CENTER" spacing="5">
+            <padding>
+                <Insets top="20"/>
+            </padding>
+            <Text text="Compte par défaut:" style="-fx-fill: #6B7280; -fx-font-size: 11px;"/>
+            <Text text="Email: admin@rh.com | Mot de passe: admin123"
+                  style="-fx-fill: #6B7280; -fx-font-size: 11px; -fx-font-weight: 500;"/>
+        </VBox> -->
+    </VBox>
+</StackPane>

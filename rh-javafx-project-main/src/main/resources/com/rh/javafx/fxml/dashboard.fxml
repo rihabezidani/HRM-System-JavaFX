@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.rh.javafx.controller.DashboardController"
+            prefHeight="700" prefWidth="1200">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #FFFFFF; -fx-padding: 16px 24px; -fx-border-color: #E5E7EB; -fx-border-width: 0 0 1px 0; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 4, 0, 0, 1);">
+            <Text text="Système de Gestion RH" style="-fx-fill: #059669; -fx-font-size: 20px; -fx-font-weight: 700;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" text="Utilisateur" style="-fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: 500;"/>
+            <Button fx:id="logoutButton" text="Déconnexion" onAction="#handleLogout"
+                    styleClass="button-danger" style="-fx-font-size: 13px; -fx-padding: 8px 16px;"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" style="-fx-background-color: #f5f5f5;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Statistics Cards -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="stat-card-green" spacing="12" alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-radius: 16px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 4); -fx-padding: 28px;">
+                    <Label fx:id="totalEmployesLabel" text="0" styleClass="stat-number"
+                           style="-fx-text-fill: white; -fx-font-size: 40px; -fx-font-weight: 700;"/>
+                    <Label text="Employés" styleClass="stat-label"
+                           style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 500;"/>
+                </VBox>
+
+                <VBox styleClass="stat-card-orange" spacing="12" alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-radius: 16px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 4); -fx-padding: 28px;">
+                    <Label fx:id="pendingCongesLabel" text="0" styleClass="stat-number"
+                           style="-fx-text-fill: white; -fx-font-size: 40px; -fx-font-weight: 700;"/>
+                    <Label text="Congés en attente" styleClass="stat-label"
+                           style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 500;"/>
+                </VBox>
+
+                <VBox styleClass="stat-card-blue" spacing="12" alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-radius: 16px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 4); -fx-padding: 28px;">
+                    <Label fx:id="totalBulletinsLabel" text="0" styleClass="stat-number"
+                           style="-fx-text-fill: white; -fx-font-size: 40px; -fx-font-weight: 700;"/>
+                    <Label text="Bulletins générés" styleClass="stat-label"
+                           style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 500;"/>
+                </VBox>
+
+                <VBox styleClass="stat-card-red" spacing="12" alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-radius: 16px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 4); -fx-padding: 28px;">
+                    <Label fx:id="averageSalaryLabel" text="0 DH" styleClass="stat-number"
+                           style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 700;"/>
+                    <Label text="Salaire moyen" styleClass="stat-label"
+                           style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 500;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Tab Pane -->
+            <TabPane fx:id="mainTabPane" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+
+                <!-- Employees Tab -->
+                <Tab text="Employés">
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20px;">
+
+                        <!-- Toolbar -->
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <TextField fx:id="empSearchField" promptText="Rechercher un employé..."
+                                       prefWidth="300"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="+ Nouvel Employé" onAction="#handleAddEmploye"
+                                    styleClass="button" style="-fx-font-size: 14px;"/>
+                        </HBox>
+
+                        <!-- Table -->
+                        <TableView fx:id="employesTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="empIdColumn" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="empMatriculeColumn" text="Matricule" prefWidth="100"/>
+                                <TableColumn fx:id="empNomColumn" text="Nom" prefWidth="120"/>
+                                <TableColumn fx:id="empPrenomColumn" text="Prénom" prefWidth="120"/>
+                                <TableColumn fx:id="empEmailColumn" text="Email" prefWidth="180"/>
+                                <TableColumn fx:id="empPosteColumn" text="Poste" prefWidth="150"/>
+                                <TableColumn fx:id="empSalaireColumn" text="Salaire" prefWidth="120"/>
+                                <TableColumn fx:id="empCongesColumn" text="Jours Congés" prefWidth="100"/>
+                                <TableColumn fx:id="empActionsColumn" text="Actions" prefWidth="180"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Leaves Tab -->
+                <Tab text="Congés">
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20px;">
+
+                        <!-- Toolbar -->
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="Filtrer:"/>
+                            <ComboBox fx:id="congeFilterCombo" prefWidth="150"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="+ Nouvelle Demande" onAction="#handleAddConge"
+                                    styleClass="button" style="-fx-font-size: 14px;"/>
+                        </HBox>
+
+                        <!-- Table -->
+                        <TableView fx:id="congesTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="congeIdColumn" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="congeEmployeColumn" text="Employé" prefWidth="150"/>
+                                <TableColumn fx:id="congeDebutColumn" text="Date Début" prefWidth="120"/>
+                                <TableColumn fx:id="congeFinColumn" text="Date Fin" prefWidth="120"/>
+                                <TableColumn fx:id="congeTypeColumn" text="Type" prefWidth="130"/>
+                                <TableColumn fx:id="congeDureeColumn" text="Durée (jours)" prefWidth="100"/>
+                                <TableColumn fx:id="congeStatutColumn" text="Statut" prefWidth="120"/>
+                                <TableColumn fx:id="congeActionsColumn" text="Actions" prefWidth="200"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Payslips Tab -->
+                <Tab text="Bulletins de Paie">
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20px;">
+
+                        <!-- Toolbar -->
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="+ Générer Bulletin" onAction="#handleAddBulletin"
+                                    styleClass="button" style="-fx-font-size: 14px;"/>
+                        </HBox>
+
+                        <!-- Table -->
+                        <TableView fx:id="bulletinsTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="bulletinIdColumn" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="bulletinEmployeColumn" text="Employé" prefWidth="150"/>
+                                <TableColumn fx:id="bulletinPeriodeColumn" text="Période" prefWidth="100"/>
+                                <TableColumn fx:id="bulletinBrutColumn" text="Salaire Brut" prefWidth="120"/>
+                                <TableColumn fx:id="bulletinPrimesColumn" text="Primes" prefWidth="100"/>
+                                <TableColumn fx:id="bulletinRetenuesColumn" text="Retenues" prefWidth="100"/>
+                                <TableColumn fx:id="bulletinNetColumn" text="Salaire Net" prefWidth="120"/>
+                                <TableColumn fx:id="bulletinActionsColumn" text="Actions" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+            </TabPane>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.rh.javafx.controller.EmployeeDashboardController"
+            prefHeight="700.0" prefWidth="1200.0" styleClass="root">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #FFFFFF; -fx-padding: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+            <Label fx:id="welcomeLabel" text="Bienvenue!" styleClass="title">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Déconnexion" onAction="#handleLogout" styleClass="button-danger"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" styleClass="custom-tab-pane">
+            <BorderPane.margin>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </BorderPane.margin>
+
+            <!-- Employee Info Tab -->
+            <Tab text="Mon Profil">
+                <VBox spacing="20" style="-fx-padding: 30;">
+                    <Label text="Informations Personnelles" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+
+                    <GridPane hgap="20" vgap="15" styleClass="info-grid">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="150" prefWidth="150"/>
+                            <ColumnConstraints minWidth="300"/>
+                        </columnConstraints>
+
+                        <Label text="Nom complet:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label fx:id="employeeNameLabel" text="---" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Matricule:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Label fx:id="employeeMatriculeLabel" text="---" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Email:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label fx:id="employeeEmailLabel" text="---" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Poste:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label fx:id="employeePosteLabel" text="---" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="Département:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label fx:id="employeeDepartementLabel" text="---" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Congés restants:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <Label fx:id="employeeCongesRestantsLabel" text="---" styleClass="highlight-value" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold" size="14"/>
+                            </font>
+                        </Label>
+                    </GridPane>
+                </VBox>
+            </Tab>
+
+            <!-- Conges Tab -->
+            <Tab text="Mes Congés">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Mes Demandes de Congé" styleClass="section-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Filtrer par statut:"/>
+                        <ComboBox fx:id="congeFilterCombo" prefWidth="150"/>
+                        <Button text="+ Nouvelle Demande" onAction="#handleAddConge" styleClass="button-success"/>
+                    </HBox>
+
+                    <TableView fx:id="congesTable" styleClass="custom-table" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="congeDateDebutColumn" text="Date Début" prefWidth="100"/>
+                            <TableColumn fx:id="congeDateFinColumn" text="Date Fin" prefWidth="100"/>
+                            <TableColumn fx:id="congeDureeColumn" text="Durée" prefWidth="70"/>
+                            <TableColumn fx:id="congeTypeColumn" text="Type" prefWidth="150"/>
+                            <TableColumn fx:id="congeMotifColumn" text="Motif" prefWidth="250"/>
+                            <TableColumn fx:id="congeStatutColumn" text="Statut" prefWidth="120"/>
+                            <TableColumn fx:id="congeActionsColumn" text="Actions" prefWidth="250"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Aucune demande de congé"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- Bulletins Tab -->
+            <Tab text="Mes Bulletins de Paie">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <Label text="Mes Bulletins de Paie" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+
+                    <TableView fx:id="bulletinsTable" styleClass="custom-table" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="bulletinPeriodeColumn" text="Période" prefWidth="120"/>
+                            <TableColumn fx:id="bulletinDateEmissionColumn" text="Date Émission" prefWidth="120"/>
+                            <TableColumn fx:id="bulletinSalaireBrutColumn" text="Salaire Brut" prefWidth="120"/>
+                            <TableColumn fx:id="bulletinPrimesColumn" text="Primes" prefWidth="100"/>
+                            <TableColumn fx:id="bulletinRetenuesColumn" text="Retenues" prefWidth="100"/>
+                            <TableColumn fx:id="bulletinSalaireNetColumn" text="Salaire Net" prefWidth="120"/>
+                            <TableColumn fx:id="bulletinActionsColumn" text="Actions" prefWidth="150"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Aucun bulletin de paie"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+</BorderPane>

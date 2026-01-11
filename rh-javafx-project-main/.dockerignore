@@ -1,0 +1,51 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# IDE files
+.idea
+.vscode
+*.iml
+.project
+.classpath
+.settings
+
+# Build output
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation (already in image)
+*.md
+CHANGELOG-FIELDS.md
+DESIGN-SYSTEM.md
+MODEL-COMPARISON.md
+QUICK-START.md
+VALIDATION-FIX.md
+
+# Docker files (no need to copy into container)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Windows batch files
+*.bat
+
+# Temporary files
+*.tmp
+*.temp
